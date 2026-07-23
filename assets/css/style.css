@@ -422,87 +422,96 @@ tr:last-child td { border-bottom: none; }
 .loader { text-align: center; padding: 48px; color: var(--text-muted); font-weight: 500; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 992px) {
-    .product-detail { grid-template-columns: 1fr; gap: 24px; }
-    .cart-layout { grid-template-columns: 1fr; }
-}
+/* ---------- Responsive (Mobile & Tablet) ---------- */
+
+/* 1. Untuk layar tablet & HP secara umum (<= 768px) */
 @media (max-width: 768px) {
-    .admin-layout { grid-template-columns: 1fr; }
-    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
-    .navbar-inner { flex-direction: column; align-items: stretch; gap: 16px; }
-    .navbar-search { max-width: 100%; }
-}
-/* Smartphone Layar Kecil / Portrait (Kurang dari 480px) */
-@media (max-width: 480px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* Tetap 2 kolom namun teks disesuaikan */
-        gap: 8px;
-    }
-    .product-info {
-        padding: 8px;
-    }
-    .product-title {
-        font-size: 12px;
-        min-height: 34px;
-    }
-    .product-price {
-        font-size: 14px;
-    }
-    .product-actions {
-        padding: 0 8px 8px;
-    }
-    .product-actions .btn {
-        font-size: 11px;
-        padding: 6px 4px;
+    /* Mencegah konten melimpah ke samping secara keseluruhan */
+    html, body {
+        overflow-x: hidden;
     }
 
-    .cart-item {
+    .container {
+        padding: 0 12px;
+    }
+
+    /* Penyesuaian Navbar agar tidak menutupi konten */
+    .navbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .navbar-search {
+        max-width: 100%;
+        min-width: 100%;
+    }
+
+    .navbar-links {
+        justify-content: space-between;
         gap: 10px;
-        padding: 10px;
-    }
-    .cart-item img {
-        width: 55px;
-        height: 55px;
-    }
-    .cart-item-title {
         font-size: 13px;
     }
-    
-    .detail-actions {
+
+    /* Penyesuaian Layout Keranjang Belanja */
+    .cart-layout {
+        grid-template-columns: 1fr; /* Jadi 1 kolom bertumpuk */
+        gap: 20px;
+    }
+
+    /* Detail Produk */
+    .product-detail {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 20px;
+    }
+
+    /* Layout Footer */
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    /* Admin Panel */
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 2. Khusus untuk Layar HP Kecil (<= 480px) */
+@media (max-width: 480px) {
+    .cart-item {
+        display: grid;
+        grid-template-columns: 70px 1fr auto; /* Gambar, Informasi, Tombol Hapus */
+        gap: 12px;
+        align-items: center;
+        padding: 12px;
+    }
+
+    .cart-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .cart-item-info {
+        display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 4px;
     }
-    .detail-actions .btn {
-        width: 100%;
+
+    .cart-item-title {
+        font-size: 14px;
     }
-}
 
+    .cart-item-price {
+        font-size: 14px;
+    }
 
-h1,h2,h3,h4,h5,h6,
-.hero h1,
-.section-title,
-.brand,
-.product-detail h1{
-    font-family:'Playfair Display',serif;
-}
-
-body{
-    letter-spacing:.2px;
-    line-height:1.75;
-}
-
-.product-card{
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-}
-
-.product-card:hover{
-    transform:translateY(-6px);
-}
-
-.btn{
-    border-radius:12px;
-}
-
-.card,.product-card,.form-card,.cart-summary,.stat-card{
-    border-radius:16px;
+    /* Buat stepper qty berada di bawah info barang */
+    .qty-stepper {
+        grid-column: 1 / -1; /* Pindah ke baris baru secara penuh */
+        margin: 8px 0 0 0;
+        justify-content: flex-start;
+    }
 }
